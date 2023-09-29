@@ -1,52 +1,43 @@
-import { Component } from "react";
 import { Button } from "./Button";
-
-const INITIAL_STATE  = {
-    name: '',
-    number: ''
-}
-
-export class  Form extends Component {
+import  {useState}  from "react";
+export function  Form ({onSubmit}) {
   
-    state = { ...INITIAL_STATE };
+  const [name,setName] = useState('');
+  const [number,setNumber] = useState('');
 
-handleInput = evt => {
-        this.setState({ name: evt.target.value });
-      }
+const handleInput = evt => {
+  setName (evt.target.value);
+  }
 
-handleNumber = evt => {
-        this.setState({ number: evt.target.value });
-      }
+const handleNumber = evt => {
+  setNumber(evt.target.value);
+  }
       
-handleSubmit = evt => {
+const handleSubmit = evt => {
         evt.preventDefault();
-        // const { name, number } = this.state;
-        this.props.onSubmit({ ...this.state });
-        this.reset();
+        onSubmit({name,number});
+        reset();
       };
     
-      reset = () => {
-        this.setState({ ...INITIAL_STATE });
+      const reset = () => {
+        setName('');
+        setNumber('');
       };
-
-    render () {
-    const {name, number} = this.state;
-
         return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
         <label  style={{       
-    display: 'flex',
-    }}>
-       Name
-  <input
+         display: 'flex',
+          }}>
+          Name
+       <input
         
-  type="text"
-  name="name"
-  value={name}
-  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  required
-  onChange = {this.handleInput}
+      type="text"
+      name="name"
+      value={name}
+         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+       title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+      onChange = {handleInput}
 />
 </label>
 
@@ -59,12 +50,11 @@ Number
   pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
   title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
   required
-  onChange = {this.handleNumber}
+  onChange = {handleNumber}
 />
 <br/>
 </label>
 <Button/>
 </form>
 )
-}
 }
