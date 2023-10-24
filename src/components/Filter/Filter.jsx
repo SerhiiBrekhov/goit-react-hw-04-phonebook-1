@@ -10,10 +10,6 @@ export const Filter = () => {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  // const onChange = e => {
-  //   dispatch(setFilters(e.target.value));
-  // };
-
   return (
     <div>
       Find contacts by name
