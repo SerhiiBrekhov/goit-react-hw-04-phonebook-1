@@ -3,11 +3,12 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getFilter, setFilter } from '../redux/filtersSlice';
+import { setFilter } from '../redux/contax/filtersSlice';
+import { selectFilter } from '../redux/contax/selectors';
 
 export const Filter = () => {
   // { value, onChangeFilter }
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   return (

@@ -1,15 +1,15 @@
 import { Button } from './Button';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts } from './redux/contactsSlice';
-import { addContact } from './redux/operations';
+import { selectContacts } from './redux/contax/selectors';
+import { addContact } from './redux/contax/operations';
 
 export function Form() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-  const { items } = useSelector(getContacts);
+  const { items } = useSelector(selectContacts);
 
   const handleInput = evt => {
     setName(evt.target.value);
@@ -17,7 +17,7 @@ export function Form() {
 
   const handleNumber = evt => {
     const stringNumber = evt.target.value;
-    setNumber(Number(stringNumber));
+    setNumber(stringNumber);
   };
 
   const handleSubmit = evt => {
